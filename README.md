@@ -18,4 +18,5 @@ hdfs dfs -put /tmp/some.file /user/root/in
 
 cd $TEZ_HOME
 hadoop jar tez-examples-0.8.4.jar orderedwordcount /user/root/in /user/root/out
+hdfs dfs -cat '/user/root/out/*'
 ```
