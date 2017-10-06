@@ -3,6 +3,8 @@
 [![DockerPulls](https://img.shields.io/docker/pulls/dvoros/tez.svg)](https://registry.hub.docker.com/u/dvoros/tez/)
 [![DockerStars](https://img.shields.io/docker/stars/dvoros/tez.svg)](https://registry.hub.docker.com/u/dvoros/tez/)
 
+_Note: this is the master branch - for a particular Tez version always check the related branch_
+
 With Oracle JDK8 and Hadoop 2.7.4.
 
 ## Usage
