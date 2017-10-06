@@ -1,11 +1,11 @@
-FROM sequenceiq/hadoop-docker:2.7.1
+FROM dvoros/hadoop:2.7.4
 
 ENV TEZ_TGZ apache-tez-0.8.4-bin.tar.gz
 ENV TEZ_HOME /usr/local/tez
 ENV TEZ_CONF_DIR $TEZ_HOME/conf
 ENV HADOOP_CLASSPATH ${TEZ_CONF_DIR}:${TEZ_HOME}/*:${TEZ_HOME}/lib/*
 
-RUN curl -s http://xenia.sote.hu/ftp/mirrors/www.apache.org/tez/0.8.4/$TEZ_TGZ | tar -xz -C /usr/local
+RUN curl -s http://www.eu.apache.org/dist/tez/0.8.4/$TEZ_TGZ | tar -xz -C /usr/local
 
 RUN cd /usr/local && ln -s apache-tez-0.8.4-bin tez
 
