@@ -1,18 +1,21 @@
-FROM dvoros/hadoop:2.7.4
+FROM dvoros/hadoop:HDP-2.6.3.0
 
-ENV TEZ_TGZ apache-tez-0.8.4-bin.tar.gz
+ENV TEZ_VERSION tez-0.8.4.2.6.3.0-235
 ENV TEZ_HOME /usr/local/tez
 ENV TEZ_CONF_DIR $TEZ_HOME/conf
 ENV HADOOP_CLASSPATH ${TEZ_CONF_DIR}:${TEZ_HOME}/*:${TEZ_HOME}/lib/*
 
-RUN curl -s http://www.eu.apache.org/dist/tez/0.8.4/$TEZ_TGZ | tar -xz -C /usr/local
+RUN mkdir -p /usr/local/$TEZ_VERSION/share
+RUN curl -s http://s3.amazonaws.com/public-repo-1.hortonworks.com/HDP/centos6/2.x/updates/2.6.3.0/tars/tez_hive2/$TEZ_VERSION.tar.gz > /tmp/$TEZ_VERSION.tar.gz
+RUN tar -C /usr/local/$TEZ_VERSION -xzf /tmp/$TEZ_VERSION.tar.gz
 
-RUN cd /usr/local && ln -s apache-tez-0.8.4-bin tez
+RUN cd /usr/local && ln -s $TEZ_VERSION tez
+RUN mkdir -p /usr/local/tez/share && curl -s http://s3.amazonaws.com/public-repo-1.hortonworks.com/HDP/centos6/2.x/updates/2.6.3.0/tars/tez_hive2/$TEZ_VERSION-minimal.tar.gz > /usr/local/tez/share/tez.tar.gz
 
 ENV PATH $PATH:$HADOOP_PREFIX/bin
 RUN $BOOTSTRAP && hdfs dfsadmin -safemode leave \
   && hdfs dfs -mkdir -p /apps/tez \
-  && hadoop fs -copyFromLocal $TEZ_HOME/share/tez.tar.gz /apps/tez/
+  && hadoop fs -copyFromLocal /tmp/$TEZ_VERSION.tar.gz /apps/tez/tez.tar.gz
 
 ADD tez-site.xml $TEZ_HOME/conf/
 ADD mapred-site.xml $YARN_CONF_DIR/
