@@ -15,6 +15,7 @@ RUN $BOOTSTRAP && hdfs dfsadmin -safemode leave \
   && hadoop fs -copyFromLocal $TEZ_HOME/share/tez.tar.gz /apps/tez/
 
 ADD tez-site.xml $TEZ_HOME/conf/
+ADD mapred-site.xml $YARN_CONF_DIR/
 
 COPY bootstrap.sh /etc/bootstrap.sh
 RUN chown root.root /etc/bootstrap.sh
