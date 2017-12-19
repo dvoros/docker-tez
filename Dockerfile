@@ -1,4 +1,4 @@
-FROM dvoros/hadoop:HDP-2.6.3.0
+FROM dvoros/hadoop:HDP-2.6.0.3
 
 ENV TEZ_VERSION tez-0.7.0.2.6.0.3-8
 ENV TEZ_HOME /usr/local/tez
