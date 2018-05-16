@@ -16,5 +16,3 @@ RUN $BOOTSTRAP && hdfs dfsadmin -safemode leave \
 
 ADD tez-site.xml $TEZ_HOME/conf/
 ADD mapred-site.xml $YARN_CONF_DIR/
-
-CMD ["/etc/bootstrap.sh"]
