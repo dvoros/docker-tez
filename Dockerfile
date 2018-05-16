@@ -1,13 +1,13 @@
-FROM dvoros/hadoop:3.1.0
+FROM dvoros/hadoop:2.9.0
 
-ENV TEZ_TGZ apache-tez-0.9.1-bin.tar.gz
+ENV TEZ_TGZ apache-tez-0.8.5-bin.tar.gz
 ENV TEZ_HOME /usr/local/tez
 ENV TEZ_CONF_DIR $TEZ_HOME/conf
 ENV HADOOP_CLASSPATH ${TEZ_CONF_DIR}:${TEZ_HOME}/*:${TEZ_HOME}/lib/*
 
-RUN curl -s http://www.eu.apache.org/dist/tez/0.9.1/$TEZ_TGZ | tar -xz -C /usr/local
+RUN curl -s http://www.eu.apache.org/dist/tez/0.8.5/$TEZ_TGZ | tar -xz -C /usr/local
 
-RUN cd /usr/local && ln -s apache-tez-0.9.1-bin tez
+RUN cd /usr/local && ln -s apache-tez-0.8.5-bin tez
 
 ENV PATH $PATH:$HADOOP_HOME/bin
 RUN $BOOTSTRAP && hdfs dfsadmin -safemode leave \
